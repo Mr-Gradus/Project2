@@ -1,6 +1,7 @@
 #include "Timer.h"
 #include <vector>
 #include <algorithm>
+#include <string>
 #include <fstream>
 
 //========================_Task_1_========================
@@ -25,25 +26,73 @@ void SortPointers(std::vector<T> &vec)
 
 
 //========================_Task_3_========================
-const std::string_view vowels{ "ÀÅÈÎÓÛİŞßàåèîóûışÿ" };
+const std::string_view vowels{ "ÀÅÈÎÓÛİŞßàåèîóûışÿ" };   
 
 void countIfFind(const std::string_view& str)
 {
 	Timer t("Count vowels - method 1(Count_if & find)");
+	
 	size_t count = std::count_if(str.begin(), str.end(), [&](const auto& c)
 		{
 			return vowels.find(c) != std::string::npos;
 		});
+	
 	std::cout << count << std::endl;
+	
+	t.print();
 }
 
-//void countIfFor()
+void countIfFor(const std::string_view& str)
+{
+	Timer t("Count vowels - method 2(Count_if & for)");
+	
+	size_t count = std::count_if(str.begin(), str.end(), [&](const auto& c)
+		{
+			for (size_t i = 0; i < vowels.size(); ++i)
+			{
+				if (vowels[i] == c)
+					return true;
+			}
+			return false;
+		});
+	std::cout << count << std::endl;
+	t.print();
+}
+void forFind(const std::string_view& str)
+{
+	Timer t("Count vowels - method 3(For & find)");
+	
+	size_t count = 0;
 
+	for (size_t i = 0; i < str.size(); ++i)
+	{
+		if (vowels.find(str[i]) != std::string::npos)
+		{
+			++count;
+		}
+	}
+	std::cout << count << std:: endl;
+	t.print();
+}
 
-//void forFind()
+void twoFor(const std::string_view& str)
+{
+	Timer t("Count vowels - method 4(For & for)");
+	
+	size_t count = 0;
 
+	for (size_t i = 0; i < str.size(); ++i)
+	{
+		for (size_t j = 0; j < vowels.size(); ++j)
+		{
+			if (vowels[j] == str[i])
+			++count;
+		}
+	}
 
-//void forTwo()
+	std::cout << count << std::endl;
+	t.print();
+}
 
 
 
@@ -60,7 +109,7 @@ int main()
 	Swap(&a, &b);
 	std::cout << a << " / " << b << std::endl;
 	std::cout << &a << std::endl;
-	
+	std::cout << "=========================================" << "\n" << std::endl;
 
 	//Task 2 test
 
@@ -70,17 +119,26 @@ int main()
 	{
 		std::cout << myVec[i] << ", ";
 	}
-
-
-	//Task 3 test
-
+	std::cout << "\n" << "\n" << "=========================================" << "\n";
 	
-	std::ifstream file("Voyina_I_Mir.txt");
-	while (file.eof())
-	{
+	
+	//Task 3
 		
-	}
+	std::ifstream file("Voyina_I_Mir.txt");
+	file.seekg(0, std::ios::end);
+	size_t size = file.tellg();
+	file.seekg(0);
+	std::string s(size, ' ');
+	file.read(&s[0], size);
 
-
+	countIfFind(s);
+	
+	countIfFor(s);
+	
+	forFind(s);
+	
+	twoFor(s);
+	
+	
 	return 0;
 }

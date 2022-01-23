@@ -1,4 +1,2 @@
 ﻿  Project2.cpp
-D:\YandexDisk\Coding\GeekBrains\C++ сложные моменты\Project2\Project2.cpp(81,15): error C2660: countIfFind: функция не принимает 0 аргументов
-D:\YandexDisk\Coding\GeekBrains\C++ сложные моменты\Project2\Project2.cpp(30,6): message : см. объявление "countIfFind"
-D:\YandexDisk\Coding\GeekBrains\C++ сложные моменты\Project2\Project2.cpp(82,2): error C2143: синтаксическая ошибка: отсутствие ";" перед "}"
+  Project2.vcxproj -> D:\YandexDisk\Coding\GeekBrains\C++ сложные моменты\Project2\x64\Debug\Project2.exe
